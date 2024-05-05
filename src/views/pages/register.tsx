@@ -7,7 +7,7 @@ export const Register = () => {
         <div class="w-[300px] space-y-4">
           <form
             class="space-y-2"
-            hx-post="/auth/register"
+            hx-post="/register"
             hx-target="#authMessage"
             hx-ext="disable-element"
             hx-disable-element="#register"
