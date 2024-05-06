@@ -3,16 +3,26 @@
 # and commit this file to your remote git repository to share the goodness with others.
 
 # Learn more from ready-to-use templates: https://www.gitpod.io/docs/introduction/getting-started/quickstart
+#
 
 tasks:
+  - name: Create .env file
+    init: |
+      eval $(gp env -e)
+      cp .env.example .env
+      sed -i -e "s|TURSO_DB_URL=|TURSO_DB_URL=$TURSO_DB_URL|g" ./.env
+      sed -i -e "s|TURSO_DB_AUTH_TOKEN=|TURSO_DB_AUTH_TOKEN=$TURSO_DB_AUTH_TOKEN|g" ./.env
+      gp sync-done create-env
+      
   - name: Get and install Bun
-    init: | 
-      curl https://bun.sh/install | bash
-      gp sync-done bun-installation
-
+    init: |
+        gp sync-await create-env
+        curl https://bun.sh/install | bash
+        gp sync-done bun-installation
+      
   - name: Install Bun dependencies
-    init: gp sync-await bun-installation 
-    command: |
+    init: |
+      gp sync-await bun-installation
       source /home/gitpod/.bashrc
-      bun install 
-      bun start
+      bun install
+    command: bun start
