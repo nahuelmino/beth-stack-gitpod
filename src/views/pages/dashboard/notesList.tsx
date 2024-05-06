@@ -28,14 +28,14 @@ export const NotesList = async ({ name, notes }: NotesListProps) => {
             <h4>Here is the notes list</h4>
           </section>
           <section class="space-y-3">
-            { 
-            notes.map(note => {
-              <>
+            <div style="bg-red">
+            { notes.map(note => 
+              <div key={note.id}>
                 <h3>{ note.title }</h3>
                 <p>{ note.body }</p>
-              </>
-            })
-            }
+              </div>
+            ) }
+            </div>
           </section>
         </main>
       </BaseHTML>
