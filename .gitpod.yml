@@ -25,4 +25,8 @@ tasks:
       gp sync-await bun-installation
       source /home/gitpod/.bashrc
       bun install
-    command: bun start
+    command: |
+      curl https://bun.sh/install | bash
+      source /home/gitpod/.bashrc
+      bun install
+      bun start
